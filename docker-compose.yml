@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  kafka:
+    container_name: turkcell-kafka
+    image: bashj79/kafka-kraft
+    ports:
+      - "9092:9092"
+    volumes:
+      - kafka_data:/opt/kafka/kafka-logs
+
+  mongodb:
+    container_name: turkcell-mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db/mongo
+
+  mysql:
+    container_name: turkcell-mysql
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldb_data:/data/db/mysql
+
+  postgresql:
+    container_name: turkcell-postgresql
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresqldb_data:/data/db/postgresql
+
+volumes:
+  kafka_data:
+  mongodb_data:
+  mysqldb_data:
+  postgresqldb_data:
