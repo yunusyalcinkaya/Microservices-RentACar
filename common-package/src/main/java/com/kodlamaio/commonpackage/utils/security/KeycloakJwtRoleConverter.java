@@ -12,21 +12,20 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class KeycloakJwtRoleConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
-
     private final static String ROLE_PREFIX = "ROLE_";
 
     @Override
-    public Collection<GrantedAuthority> convert(Jwt source) {
-        return null;
+    public Collection<GrantedAuthority> convert(Jwt jwt) {
+        return extractRoles(jwt);
     }
 
-    private Collection<GrantedAuthority> extractRoles(Jwt jwt){
+    private Collection<GrantedAuthority> extractRoles(Jwt jwt) {
         var claims = jwt.getClaims();
-        var realmAccess = (Map<String,Object>) claims.getOrDefault("realm_access", Collections.emptyMap());
-        var roles = (List<String>)realmAccess.getOrDefault("roles",Collections.emptyList());
+        var realmAccess = (Map<String, Object>) claims.getOrDefault("realm_access", Collections.emptyMap());
+        var roles = (List<String>) realmAccess.getOrDefault("roles", Collections.emptyList());
 
         return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(ROLE_PREFIX +role))
+                .map(role -> new SimpleGrantedAuthority(ROLE_PREFIX + role))
                 .collect(Collectors.toList());
     }
 }
