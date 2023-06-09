@@ -60,7 +60,7 @@ public class FilterManager implements FilterService {
 
     @Override
     public void deleteAllByModelId(UUID modelId) {
-
+        repository.deleteAllByModelId(modelId);
     }
     @Override
     public Filter getByCarId(UUID carId) {

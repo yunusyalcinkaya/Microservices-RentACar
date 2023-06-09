@@ -21,7 +21,7 @@ public class MaintenanceConsumer {
     )
     public void consume(MaintenanceCompletedEvent event) {
         Filter filter = service.getByCarId(event.getCarId());
-        filter.setState("AVAILABLE");
+        filter.setState("Available");
         service.add(filter);
         log.info("Maintenance completed event consumed {}", event);
     }

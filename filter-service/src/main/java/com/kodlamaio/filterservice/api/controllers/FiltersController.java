@@ -5,6 +5,7 @@ import com.kodlamaio.filterservice.business.abstracts.FilterService;
 import com.kodlamaio.filterservice.business.dto.responses.GetAllFiltersResponse;
 import com.kodlamaio.filterservice.business.dto.responses.GetFilterResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,11 +18,13 @@ public class FiltersController {
     private final FilterService service;
 
     @GetMapping
+    @Secured("ROLE_user")
     public List<GetAllFiltersResponse> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/{id}")
+    @Secured("ROLE_user")
     public GetFilterResponse getByIId(@PathVariable UUID id) {
         return service.getById(id);
     }

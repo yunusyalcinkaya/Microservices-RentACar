@@ -4,5 +4,5 @@ spring:
   cloud:
     config:
       profile: dev
-  config:
+  config: # dışarıdan alınacak yapılandırma ayarlarının kaynapını belirtir
     import: configserver:http://localhost:8888
