@@ -39,7 +39,7 @@ public class CarsController {
     }
 
     @GetMapping("/{id}")
-    @PostAuthorize(Roles.User + "and returnObject.state == Available")
+    @PostAuthorize(Roles.User + "and returnObject.state.equals('Available')")
     public GetCarResponse getById(@PathVariable UUID id, @AuthenticationPrincipal Jwt jwt) {
         System.out.println(jwt.getClaims().get("preferred_username"));
         System.out.println(jwt.getClaims().get("email"));// jwt içindeki alanlar, token'i jwt.io'da decode edersen bu alanları görürsün
