@@ -14,3 +14,5 @@
 - Bean Validation
 - RestAPI
 - Java Persistence API (JPA)
+
+![Architecture](images/Microservices.png)
